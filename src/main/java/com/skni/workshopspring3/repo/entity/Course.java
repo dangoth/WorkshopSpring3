@@ -18,34 +18,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "person")
+@Table(name = "course")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
 
-public class Person {
-
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "coursename")
+    private String coursename;
 
-    @Column(name = "lastname")
-    private String lastname;
+    @Column(name = "year")
+    private int year;
 
-    @Column(name = "birthdate")
-    private LocalDate birthdate;
+    @Column(name = "school")
+    private String school;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
-    private GenderEnum gender;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
+    @Column(name = "coursetype")
+    private CourseTypeEnum coursetype;
 
 }
