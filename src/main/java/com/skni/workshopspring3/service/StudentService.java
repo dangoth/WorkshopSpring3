@@ -54,5 +54,9 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    public List<Student> getAllByNameAndSchool(String name, String school) {
+        return studentRepository.findAllByNameAndSchool(name, school);
+    }
+
 
 }

@@ -56,6 +56,9 @@ public class WorkshopSpring3Application {
 			System.out.println(studentService.deleteStudentById(studentMale.getId()));
 			System.out.println(studentService.getAllStudents());
 
+			System.out.println("Niestandardowe polecenie");
+			System.out.println(studentService.getAllByNameAndSchool("Anna", "SGH"));
+
 		};
 	}
 }

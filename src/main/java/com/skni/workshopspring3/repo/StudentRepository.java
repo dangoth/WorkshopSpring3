@@ -18,4 +18,10 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findAllByGenderAndCourse_Coursetype(GenderEnum gender, CourseTypeEnum coursetype);
 
+
+    @Query(
+            value = "SELECT distinct s.* FROM student s JOIN course c ON s.course_id = c.id " +
+                    "WHERE s.name = ?1 AND c.school = ?2",
+            nativeQuery = true)
+    List<Student> findAllByNameAndSchool(String name, String school);
 }
