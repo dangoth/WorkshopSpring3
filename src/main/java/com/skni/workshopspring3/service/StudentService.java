@@ -58,5 +58,25 @@ public class StudentService {
         return studentRepository.findAllByNameAndSchool(name, school);
     }
 
+    public boolean updateStudent(long id, Student updatedStudent) {
+        Optional<Student> currentStudent = studentRepository.findById(id);
+        if(currentStudent.isPresent()) {
+            Student newStudent = currentStudent.get();
+            if(updatedStudent.getName() != null) {
+                newStudent.setName(updatedStudent.getName());
+            }
+            if(updatedStudent.getLastname() != null) {
+                newStudent.setLastname(updatedStudent.getLastname());
+            }
+            if(updatedStudent.getGender() != null) {
+                newStudent.setGender(updatedStudent.getGender());
+            }
+            newStudent.setId(id);
+            studentRepository.save(newStudent);
+            return true;
+        }
+        return false;
+    }
+
 
 }

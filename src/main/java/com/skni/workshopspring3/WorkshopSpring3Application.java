@@ -8,6 +8,7 @@ import com.skni.workshopspring3.repo.entity.GenderEnum;
 import com.skni.workshopspring3.repo.entity.Student;
 import com.skni.workshopspring3.service.CourseService;
 import com.skni.workshopspring3.service.StudentService;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +22,11 @@ public class WorkshopSpring3Application {
 	}
 
 	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
+
+	@Bean
 	CommandLineRunner init(CourseService courseService, StudentService studentService) {
 		return (args) -> {
 			Course course = courseService.addCourse("Informatyka", 3, "SGH", CourseTypeEnum.INZYNIER);
@@ -28,7 +34,7 @@ public class WorkshopSpring3Application {
 			Student studentMale = studentService.addStudent(
 					"Adam",
 					"Nowak",
-					LocalDate.of(1996, 05,10),
+					LocalDate.of(1996, 05, 10),
 					GenderEnum.MALE,
 					course
 			);
@@ -36,29 +42,10 @@ public class WorkshopSpring3Application {
 			Student studentFemale = studentService.addStudent(
 					"Anna",
 					"Kowalska",
-					LocalDate.of(1993, 10,22),
+					LocalDate.of(1993, 10, 22),
 					GenderEnum.FEMALE,
 					course
 			);
-
-			System.out.println(studentMale);
-			System.out.println(studentFemale);
-
-			System.out.println("Get by last name");
-			System.out.println(studentService.findAllByLastName("Nowak"));
-
-			System.out.println("Get by gender and course type");
-			System.out.println(studentService.getStudentByGenderAndByCourseType(GenderEnum.MALE, CourseTypeEnum.INZYNIER));
-			System.out.println(studentService.getStudentByGenderAndByCourseType(GenderEnum.FEMALE, CourseTypeEnum.LICENCJAT));
-
-			System.out.println("Get all and delete");
-			System.out.println(studentService.getAllStudents());
-			System.out.println(studentService.deleteStudentById(studentMale.getId()));
-			System.out.println(studentService.getAllStudents());
-
-			System.out.println("Niestandardowe polecenie");
-			System.out.println(studentService.getAllByNameAndSchool("Anna", "SGH"));
-
 		};
 	}
 }
